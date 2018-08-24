@@ -6,13 +6,13 @@
 </head>
 <body>
 <div>
-    <img src="images/2223.jpg" alt="">
+
 </div>
 <script>
     (function () {
         let urlArr = ["https://www.baidu.com","https://www.jd.com","https://www.tmall.com","https://www.qq.com","https://www.youku.com","https://www.163.com"],
             urlArrLength = urlArr.length,
-            localUrlIndex = 0?0:localStorage.getItem("randomUrlIndex"),
+            localUrlIndex = localStorage.getItem("randomUrlIndex"),
             lastUrlIndex = localUrlIndex?localUrlIndex:0,
             newUrlIndex = 0,
             newUrl = urlArr[newUrlIndex];
@@ -21,9 +21,8 @@
             newUrl = urlArr[newUrlIndex];
         }
 
-        console.log("newUrlIndex",newUrlIndex);
         localStorage.setItem("randomUrlIndex",newUrlIndex.toString());
-        // window.location.assign(newUrl);
+        window.location.assign(newUrl);
     }())
 </script>
 </body>
