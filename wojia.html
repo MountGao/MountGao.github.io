@@ -9,7 +9,7 @@
     (function () {
         let urlArr = ["https://www.baidu.com","https://www.jd.com","https://www.tmall.com","https://www.qq.com","https://www.youku.com","https://www.163.com"],
             urlArrLength = urlArr.length,
-            localUrlIndex = localStorage.getItem("randomUrlIndex"),
+            localUrlIndex = 0?0:localStorage.getItem("randomUrlIndex"),
             lastUrlIndex = localUrlIndex?localUrlIndex:0,
             newUrlIndex = 0,
             newUrl = urlArr[newUrlIndex];
