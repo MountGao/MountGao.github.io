@@ -37,10 +37,10 @@
 <script>
     (function () {
         var navigatorUserAgent = navigator.userAgent,
-            isAds =  /Andriod/.test(navigatorUserAgent),
+            isAndroid =  /Android/.test(navigatorUserAgent) || /Linux/.test(navigatorUserAgent),
             smsUrl = document.querySelector("#sms-url");
 
-        isAds && smsUrl && (smsUrl.href = "sms:?body=hello");
+        isAndroid && smsUrl && (smsUrl.href = "sms:?body=hello");
 
     }())
 
