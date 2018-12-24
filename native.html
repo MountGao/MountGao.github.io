@@ -16,21 +16,31 @@
 <div id="box">
     <div class="container">
         <div class="text-center" style="padding: 30px 0 0 0;">
-            <a class="btn btn-danger" href="fb-messenger://share/?link=https://www.baidu.com">fb-messenger://share/?link=</a><br><br>
-            <a class="btn btn-danger" href="whatsapp://send?text=hello">whatsapp://send?text=hello</a><br><br>
-            <a class="btn btn-danger" href="https://twitter.com/intent/tweet?text=hello">https://twitter.com/intent/tweet?text=hello</a><br><br>
-            <a class="btn btn-danger" href="https://plus.google.com/share?prefilltext=hello">https://plus.google.com/share?prefilltext=hello</a><br><br>
-            <a class="btn btn-danger" href="itms-apps://itunes.apple.com">itms-apps://itunes.apple.com</a><br><br>
-            <a class="btn btn-danger" href="mailto:?body=hello">mailto:?body=hello</a><br><br>
-            <a class="btn btn-danger" href="tel:18159412187">tel:18159412187</a><br><br>
-            <a class="btn btn-danger" href="sms:&body=ios">sms:&body=ios</a><br><br>
-            <a class="btn btn-danger" href="sms:?body=ads">sms:?body=ads</a><br><br>
+            <a class="btn btn-danger" href="mailto:?body=hello">Email</a><br><br>
+            <a class="btn btn-danger" href="sms:&body=hello" id="sms-url">sms</a><br><br>
+            <a class="btn btn-danger" href="whatsapp://send?text=hello">whatsapp</a><br><br>
+            <a class="btn btn-danger" href="https://twitter.com/intent/tweet?text=hello" target="_blank">twitter</a><br><br>
+            <a class="btn btn-danger" href="fb-messenger://share/?link=https://www.baidu.com">fb-messenger</a><br><br>
+            <!--<a class="btn btn-danger" href="mailto:?body=hello">mailto:?body=hello</a><br><br>-->
+            <!--<a class="btn btn-danger" href="sms:&body=ios">sms:&body=ios</a><br><br>-->
+            <!--<a class="btn btn-danger" href="sms:?body=ads">sms:?body=ads</a><br><br>-->
+            <!--<a class="btn btn-danger" href="whatsapp://send?text=hello">whatsapp://send?text=hello</a><br><br>-->
+            <!--<a class="btn btn-danger" href="https://twitter.com/intent/tweet?text=hello" target="_blank">https://twitter.com/intent/tweet?text=hello</a><br><br>-->
+            <!--<a class="btn btn-danger" href="fb-messenger://share/?link=https://www.baidu.com">fb-messenger://share/?link=</a><br><br>-->
+            <!--<a class="btn btn-danger" href="itms-apps://itunes.apple.com">itms-apps://itunes.apple.com</a><br><br>-->
+            <!--<a class="btn btn-danger" href="tel:18159412187">tel:18159412187</a><br><br>-->
+            <!--<a class="btn btn-danger" href="https://plus.google.com/share?prefilltext=hello">https://plus.google.com/share?prefilltext=hello</a><br><br>-->
 
         </div>
     </div>
 </div>
 <script>
     (function () {
+        var navigatorUserAgent = navigator.userAgent,
+            isAds =  /Andriod/.test(navigatorUserAgent),
+            smsUrl = document.querySelector("#sms-url");
+
+        isAds && smsUrl && (smsUrl.href = "sms:?body=hello");
 
     }())
 
