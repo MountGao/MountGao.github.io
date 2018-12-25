@@ -16,10 +16,10 @@
     <div class="container">
         <div class="text-center" style="padding: 30px 0 0 0;">
             <a class="btn btn-danger" href="mailto:?body=https%3A%2F%2Fvineky.com">Email</a><br><br>
-            <a class="btn btn-danger" href="sms:&body=https%3A%2F%2Fvineky.com" id="sms-url">sms</a><br><br>
-            <a class="btn btn-danger" href="whatsapp://send?text=https%3A%2F%2Fvineky.com">whatsapp</a><br><br>
+            <a class="btn btn-danger" href="sms:&body=https%3A%2F%2Fvineky.com" id="sms-url">sms-mobile</a><br><br>
+            <a class="btn btn-danger" href="whatsapp://send?text=https%3A%2F%2Fvineky.com">whatsapp-mobile</a><br><br>
             <a class="btn btn-danger" href="https://web.whatsapp.com/send?text=https%3A%2F%2Fvineky.com" target="_blank">whatsapp-PC</a><br><br>
-            <a class="btn btn-danger" href="https://twitter.com/messages/compose?text=https%3A%2F%2Fvineky.com">twitter Direct Messages</a><br><br>
+            <a class="btn btn-danger" href="https://twitter.com/messages/compose?text=https%3A%2F%2Fvineky.com">twitter Direct Messages-mobile</a><br><br>
             <a class="btn btn-danger" href="https://twitter.com/messages/compose?text=https%3A%2F%2Fvineky.com" target="_blank">twitter Direct Messages-PC</a><br><br>
 
             <!--<a class="btn btn-danger" href="mailto:?body=hello">mailto:?body=hello</a><br><br>-->
@@ -45,7 +45,6 @@
 
         isAndroid && smsUrl && (smsUrl.href = "sms:?body=https%3A%2F%2Fvineky.com");
 
-        console.log(encodeURIComponent("https://vineky.com"));
 
     }())
 
