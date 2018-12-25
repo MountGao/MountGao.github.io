@@ -15,10 +15,10 @@
 <div id="box">
     <div class="container">
         <div class="text-center" style="padding: 30px 0 0 0;">
-            <a class="btn btn-danger" href="mailto:?body=https://vineky.com">Email</a><br><br>
-            <a class="btn btn-danger" href="sms:&body=https://vineky.com" id="sms-url">sms</a><br><br>
-            <a class="btn btn-danger" href="whatsapp://send?text=https://vineky.com">whatsapp</a><br><br>
-            <a class="btn btn-danger" href="https://twitter.com/messages/compose?recipient_id=&text=https://vineky.com">twitter Direct Messages</a>
+            <a class="btn btn-danger" href="mailto:?body=https%3A%2F%2Fvineky.com">Email</a><br><br>
+            <a class="btn btn-danger" href="sms:&body=https%3A%2F%2Fvineky.com" id="sms-url">sms</a><br><br>
+            <a class="btn btn-danger" href="whatsapp://send?text=https%3A%2F%2Fvineky.com">whatsapp</a><br><br>
+            <a class="btn btn-danger" href="https://twitter.com/messages/compose?recipient_id=&text=https%3A%2F%2Fvineky.com">twitter Direct Messages</a>
 
             <!--<a class="btn btn-danger" href="mailto:?body=hello">mailto:?body=hello</a><br><br>-->
             <!--<a class="btn btn-danger" href="sms:&body=ios">sms:&body=ios</a><br><br>-->
@@ -42,6 +42,8 @@
             smsUrl = document.querySelector("#sms-url");
 
         isAndroid && smsUrl && (smsUrl.href = "sms:?body=hello");
+
+        console.log(encodeURIComponent("https://vineky.com"));
 
     }())
 
