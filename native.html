@@ -19,6 +19,7 @@
             <a class="btn btn-danger" href="sms:&body=https%3A%2F%2Fvineky.com" id="sms-url">sms</a><br><br>
             <a class="btn btn-danger" href="whatsapp://send?text=https%3A%2F%2Fvineky.com">whatsapp</a><br><br>
             <a class="btn btn-danger" href="https://twitter.com/messages/compose?recipient_id=&text=https%3A%2F%2Fvineky.com">twitter Direct Messages</a>
+            <a class="btn btn-danger" href="https://twitter.com/messages/compose?recipient_id=3805104374&text=https%3A%2F%2Fvineky.com">Message @furni</a>
 
             <!--<a class="btn btn-danger" href="mailto:?body=hello">mailto:?body=hello</a><br><br>-->
             <!--<a class="btn btn-danger" href="sms:&body=ios">sms:&body=ios</a><br><br>-->
@@ -41,7 +42,7 @@
             isAndroid =  /Android/.test(navigatorUserAgent) || /Linux/.test(navigatorUserAgent),
             smsUrl = document.querySelector("#sms-url");
 
-        isAndroid && smsUrl && (smsUrl.href = "sms:?body=hello");
+        isAndroid && smsUrl && (smsUrl.href = "sms:?body=https%3A%2F%2Fvineky.com");
 
         console.log(encodeURIComponent("https://vineky.com"));
 
