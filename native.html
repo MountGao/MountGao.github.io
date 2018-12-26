@@ -43,9 +43,10 @@
     (function () {
         var navigatorUserAgent = navigator.userAgent,
             isAndroid =  /Android/.test(navigatorUserAgent) || /Linux/.test(navigatorUserAgent),
-            smsUrl = document.querySelector("#sms-url");
+            smsUrl = document.querySelector("#sms-url"),
+            title = "Can you do me a favor and help me cut price? I sincerely wish you a great day!";
 
-        isAndroid && smsUrl && (smsUrl.href = "sms:?body=https%3A%2F%2Fvineky.com");
+        isAndroid && smsUrl && (smsUrl.href = "sms:?body=" + title + "%20%20" + "https%3A%2F%2Fvineky.com");
 
 
     }())
