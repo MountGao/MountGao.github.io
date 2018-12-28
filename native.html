@@ -49,7 +49,7 @@
             title = "Can you do me a favor and help me cut price? I sincerely wish you a great day!";
 
         isAndroid && smsUrl && (smsUrl.href = "sms:?body=" + title + "%20%20" + "https%3A%2F%2Fvineky.com");
-
+        !isAndroid && window.clipboardData.setData("Text",title);
 
     }())
 
