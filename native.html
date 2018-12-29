@@ -23,6 +23,7 @@
             <a class="btn btn-danger" href="https://twitter.com/intent/tweet?text=hello" target="_blank">twitter-tweet-general</a><br><br>
             <a class="btn btn-danger" href="twitter://intent/tweet?text=hello" target="_blank" id="btnCopy">twitter-tweet-mobile</a><br><br>
             <a class="btn btn-danger" href="http://" target="_blank">http://</a><br><br>
+            <a class="btn btn-danger" href="safari://" target="_blank">safari://</a><br><br>
 
 
             <!--<a class="btn btn-danger" href="mailto:?body=https%3A%2F%2Fvineky.com">Email</a><br><br>-->
@@ -46,15 +47,8 @@
 
         </div>
     </div>
-    <!-- Target -->
-    <input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
-
-    <!-- Trigger -->
-    <button class="btn" data-clipboard-target="#foo">Copy to clipboard</button>
 
 </div>
-<input id="demoInput" value="hello world" style="display: none;">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 <script>
     (function () {
         var navigatorUserAgent = navigator.userAgent,
@@ -65,41 +59,7 @@
         isAndroid && smsUrl && (smsUrl.href = "sms:?body=" + title + "%20%20" + "https%3A%2F%2Fvineky.com");
     }());
 
-    var  EventUtil = {
-        getClipboardText: function(event){
-            var clipboardData = (event.clipboardData || window.clipboardData);
-            return clipboardData.getData("text");
-        },
-        setClipboardText: function (event, value) {
-            if (event.clipboardData){
-                return event.clipboardData.setData("text/plain", value);
-            }  else if (window.clipboardData){
-                return window.clipboardData.setData("text", value);
-            }
-        }
-    };
 
-    (function () {
-        var clipboard = new ClipboardJS('.btn',{
-            text: function(trigger) {
-                return "hello";
-            }
-        });
-
-        clipboard.on('success', function(e) {
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
-
-            e.clearSelection();
-        });
-
-        clipboard.on('error', function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-        });
-
-    }())
 
 </script>
 </body>
