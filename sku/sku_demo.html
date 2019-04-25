@@ -6,7 +6,6 @@
             display: none;
         }
         ul li{
-            width: 30px;
             height: 30px;
             line-height: 30px;
             padding: 10px;
@@ -22,6 +21,9 @@
         ul li.disabled{
             background-color: #888888;
         }
+        .red{
+            color: red;
+        }
     </style>
 
 </head>
@@ -29,14 +31,23 @@
 <div id="box" class="jackson-box" v-cloak>
 
     <template>
-        <p v-for="(item, index) in skuList">
-            id:{{item.sku_id}}/{{item.color}}/{{item.size}}/${{item.price}}/${{item.price_2}}/num:{{item.inventory}}</p>
+        <p v-for="(item, index) in skuList"
+           :class="[{'red': item.sku_id === lastSkuID}]">
+            <span v-for="(value, key) in item" v-if="key !== 'sku_photo'">
+                {{ key + ' : ' + value}}
+            </span>
+        </p>
     </template>
-    <ul>
-        <li>item</li>
-        <li>item</li>
-        <li>item</li>
-    </ul>
+    <template v-for="(spec, index) in specificationsArr">
+        <ul v-if="spec.items.length > 0">
+            <span>{{spec.text}}</span>
+            <li v-for="(item, ind) in spec.items"
+                :class="[{'disabled': item.isDisabled, 'selected': selectedIndexArr[index] === ind}]"
+                @click.stop="chooseItem(spec.name,item.name, index, ind, item.isDisabled)">
+                {{item.name}}
+            </li>
+        </ul>
+    </template>
 
 
 </div>
@@ -68,78 +79,162 @@
     new Vue({
         el:"#box",
         data:{
+            specSeparator: ";",
             skuList: [],
-            showData: {},
-            goodsDict: {},
-            allKeys: []
+            mySkuSet: {},
+            specificationsArr: [],
+            selectedSpecArr: [],
+            selectedIndexArr: [],
+            lastResult: {}
         },
         methods:{
-            initData:function (skuList) {
+            initData: function (skuList) {
+                console.time();
                 this.skuList = skuList;
-                this.calculateShowData();
-            },
-            calculateShowData: function () {
+
                 var _this = this,
-                    dict  = "";
-
-                _this.skuList.forEach(function (item, index) {
-                    for (var key in item) {
-                        if (item.hasOwnProperty(key)) {
-                            if (key === "color" || key !== 'size') {
-                                dict += item[key] + ';';
-                                if (_this.showData[key]) {
-                                    // 去重
-                                    if (_this.showData[key].indexOf(item[key]) === -1) {
-                                        _this.showData[key].push(item[key]);
-                                    }
-                                } else {
-                                    _this.showData[key] = new Array(item[key]);
-                                    _this.allKeys.push(item[key]);
-                                }
-                            }
+                    specSeparator = _this.specSeparator,
+                    mySkuSet = {},
+                    specificationsArr = [
+                        {
+                            name: "color",
+                            text: "color",
+                            items: []
+                        },
+                        {
+                            name: "size",
+                            text: "size",
+                            items: []
+                        }
+                    ];
 
 
+                skuList.forEach(function (item) {
+
+                    var keyArr = [];
+                    specificationsArr.forEach(function (spec) {
+
+                        var itemAttr  = item[spec.name],
+                            specItems = spec.items,
+                            existItem = specItems.find(function (findItem) {
+                                return findItem.name === itemAttr;
+                            });
+                        if (itemAttr && !existItem) {
+                            specItems.push({name: itemAttr});
                         }
 
-                        if (item.num > 0) {
-                            _this.goodsDict[dict] = {
-                                id: item.id,
-                                num: item.num
-                            };
+                        if (itemAttr) {
+                            keyArr.push(itemAttr);
                         }
+
+                    })
+
+                    if (keyArr.length > 0) {
+                        mySkuSet[keyArr.join(specSeparator)] = item;
                     }
+
                 })
 
+                _this.specificationsArr = specificationsArr;
+                _this.mySkuSet = mySkuSet;
 
-                for (var ke in _this.showData) {
-                    _this.allKeys.push(_this.showData[ke]);
+                console.timeEnd();
+
+            },
+            chooseItem: function (name, spec, index, ind, isDisabled) {
+                if(isDisabled) {
+                    return
                 }
-                console.log(this.goodsDict);
-                console.log(this.allKeys);
-                console.log(this.showData);
+
+                console.time();
+                var _this = this,
+                    notSelectedSpec = "",
+                    notSelectedIndex = -1,
+                    selectedSpecArr = _this.selectedSpecArr,
+                    selectedIndexArr = _this.selectedIndexArr;
+
+
+
+                if (selectedSpecArr[index] !== spec) {
+                    selectedSpecArr[index] = spec;
+                    selectedIndexArr[index] = ind;
+                } else {
+                    selectedSpecArr[index] = notSelectedSpec;
+                    selectedIndexArr[index] = notSelectedIndex;
+                }
+
+                _this.selectedIndexArr = _this.selectedIndexArr.concat([]);
+                _this.checkItem();
+                console.timeEnd();
+            },
+            checkItem: function () {
+                var _this = this,
+                    option = _this.specificationsArr,
+                    selectedSpecArr = _this.selectedSpecArr,
+                    result = [];
+
+                option.forEach(function (item, index) {
+                    result[index] = selectedSpecArr[index] ? selectedSpecArr[index] : "";
+                })
+
+                option.forEach(function (item, index) {
+
+                    var last = result[index];
+
+                    item.items.forEach(function (spec, ind) {
+                        result[index] = spec.name;
+                        item.items[ind].isDisabled = !_this.isMay(result);
+                    })
+
+                    result[index] = last;
+                })
+
+                _this.lastResult = _this.mySkuSet[result.join(_this.specSeparator)];
+                console.log("result==",_this.lastResult);
+
+
+
+            },
+            isMay: function (result) {
+
+                for (var i = 0; i < result.length;i++) {
+                    if (result[i] === "") {
+                        return true;
+                    }
+                }
+
+                if (!this.mySkuSet[result.join(this.specSeparator)]) {
+                    return false;
+                }
+
+                return this.mySkuSet[result.join(this.specSeparator)].inventory > 0;
             }
+
         },
         computed:{
-
+            lastSkuID: function () {
+                return this.lastResult ? this.lastResult.sku_id : '';
+            }
         },
         created:function () {
             var skuList = [
-                {"sku_id":"1","listing_id":"4","color":"red","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"2","listing_id":"4","color":"red","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"3","listing_id":"4","color":"red","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"4","listing_id":"4","color":"red","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"5","listing_id":"4","color":"black","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"7","listing_id":"4","color":"black","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"1","listing_id":"4","color":"red","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"2","listing_id":"4","color":"red","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"3","listing_id":"4","color":"red","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"4","listing_id":"4","color":"red","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71EpeflOmNL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"5","listing_id":"4","color":"black","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"7","listing_id":"4","color":"black","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"8","listing_id":"4","color":"black","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"9","listing_id":"4","color":"black","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71-cyw4c2nL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"10","listing_id":"4","color":"blue","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71Gd1ddNHqL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"11","listing_id":"4","color":"blue","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71Gd1ddNHqL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
-                {"sku_id":"12","listing_id":"4","color":"blue","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71Gd1ddNHqL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
+                // {"sku_id":"12","listing_id":"4","color":"blue","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71Gd1ddNHqL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"13","listing_id":"4","color":"blue","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/71Gd1ddNHqL._SX466._SX._UX._SY._UY_.jpg","inventory":"1000"},
                 {"sku_id":"14","listing_id":"4","color":"gray","size":"Small","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/81Y%2Bq-5sR%2BL._UX466_.jpg","inventory":"1000"},
                 {"sku_id":"15","listing_id":"4","color":"gray","size":"Medium","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/81Y%2Bq-5sR%2BL._UX466_.jpg","inventory":"1000"},
                 {"sku_id":"16","listing_id":"4","color":"gray","size":"Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/81Y%2Bq-5sR%2BL._UX466_.jpg","inventory":"1000"},
-                {"sku_id":"17","listing_id":"4","color":"gray","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/81Y%2Bq-5sR%2BL._UX466_.jpg","inventory":"1000"}];
+                // {"sku_id":"17","listing_id":"4","color":"gray","size":"X-Large","price":"9.99","price_2":"7.99","sku_photo":"https://images-na.ssl-images-amazon.com/images/I/81Y%2Bq-5sR%2BL._UX466_.jpg","inventory":"1000"}
+                ];
 
             this.initData(skuList);
         }

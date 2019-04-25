@@ -228,12 +228,15 @@
                     i]; //修改数据结构格式，改成键值对的方式，以方便和选中之后的值进行匹配
             }
             self.checkItem();
+
+            console.log(this.shopItemInfo);
         },
         mounted: function () {
 
         },
         methods: {
             specificationBtn: function (item, n, event, index) {
+                console.time();
                 var self = this;
                 if (self.selectArr[n] != item) {
                     self.selectArr[n] = item;
@@ -244,6 +247,7 @@
                     self.subIndex[n] = -1; //去掉选中的颜色
                 }
                 self.checkItem();
+                console.timeEnd();
             },
             checkItem: function () {
                 var self = this;
@@ -266,9 +270,11 @@
                         return item.difference === self.selectArr.join(',');
                     }))
                 }
+                console.log(this.shopItemInfo[self.selectArr.join(',')]);
                 self.$forceUpdate(); //重绘
             },
             isMay: function (result) {
+                console.log("result", result);
                 for (var i in result) {
                     if (result[i] == '') {
                         return true; //如果数组里有为空的值，那直接返回true
