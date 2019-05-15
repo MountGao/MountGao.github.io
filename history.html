@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History API</title>
+</head>
+<body>
+<div id="box">
+    <div>
+        <strong>pageshow: </strong><span id="pageshow"></span>
+    </div>
+    <div>
+        <strong>pagehide: </strong><span id="pagehide"></span>
+    </div>
+</div>
+<script>
+    (function () {
+        var pageshow = document.querySelector("#pageshow"),
+            pagehide = document.querySelector("#pagehide");
+
+        window.addEventListener("pageshow", evt => {
+            console.log("pageshow", evt.persisted);
+            if (!evt.persisted) {
+                console.log("没有Bfcache缓存");
+                pageshow.innerHTML = "没有Bfcache缓存";
+            }else {
+                console.log("Bfcache缓存");
+                pageshow.innerHTML = "Bfcache缓存";
+            }
+        })
+
+        window.addEventListener("pagehide", evt => {
+            console.log("pagehide", evt.persisted);
+            if (!evt.persisted) {
+                console.log("没有Bfcache缓存");
+                pagehide.innerHTML = "没有Bfcache缓存";
+            }else {
+                console.log("Bfcache缓存");
+                pagehide.innerHTML = "Bfcache缓存";
+            }
+        })
+    })();
+</script>
+</body>
+</html>
