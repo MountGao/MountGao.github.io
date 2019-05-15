@@ -12,11 +12,15 @@
     <div>
         <strong>pagehide: </strong><span id="pagehide"></span>
     </div>
+    <div id="timestamp"></div>
 </div>
 <script>
     (function () {
         var pageshow = document.querySelector("#pageshow"),
-            pagehide = document.querySelector("#pagehide");
+            pagehide = document.querySelector("#pagehide"),
+            timestamp = document.querySelector("#timestamp");
+
+        timestamp.innerHTML = Date.now().toString();
 
         window.addEventListener("pageshow", evt => {
             console.log("pageshow", evt.persisted);
@@ -27,7 +31,7 @@
                 console.log("Bfcache缓存");
                 pageshow.innerHTML = "Bfcache缓存";
             }
-        })
+        });
 
         window.addEventListener("pagehide", evt => {
             console.log("pagehide", evt.persisted);
@@ -38,7 +42,9 @@
                 console.log("Bfcache缓存");
                 pagehide.innerHTML = "Bfcache缓存";
             }
-        })
+        });
+
+
     })();
 </script>
 </body>
