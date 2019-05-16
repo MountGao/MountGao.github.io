@@ -47,6 +47,15 @@
             }
         });
 
+        var beforeunloadData = sessionStorage.getItem("beforeunload");
+        if (beforeunloadData) {
+            timestamp.innerHTML = beforeunloadData;
+        }
+
+        window.addEventListener("beforeunload", function () {
+            sessionStorage.setItem("beforeunload", "1");
+        })
+
 
     })();
 </script>
