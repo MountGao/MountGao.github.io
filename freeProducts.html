@@ -303,7 +303,6 @@
             display: flex;
             flex-wrap: wrap;
             margin: 0 calc(var(--rr-goods-item-margin-btm)/2*-1);
-            padding-top: 20px
         }
 
         @media (min-width: 1024px) {
@@ -600,14 +599,14 @@
             padding: 5px 0;
             background: var(--color-rr);
             color: #fff;
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: -4px;
         }
     </style>
 </head>
 <body>
 <div id="app">
-    <h1 class="text-center">Free Products</h1>
+    <h1 class="text-center">Amazon Free Products</h1>
     <my-goods-list :goods-list="goodsList" :listen-scroll="false"></my-goods-list>
 </div>
 <script src="Public/js/vue.min.js"></script>
@@ -645,7 +644,7 @@
                         <a :href="goods.link" target="_blank" class="open-on-amazon">Open on Amazon &gt;&gt;</a>
                     </div>
                     <div>
-                        <span class="btn-want-it">#{{ goods.order_id }}</span>
+                        <span class="btn-want-it">NO.{{ goods.order_id }}</span>
                     </div>
                     <div v-if="goods.is_total_limit > 0" class="rr-goods-item__sold-out">Sold Out</div>
                 </a>
