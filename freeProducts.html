@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amazon Free Products</title>
+    <style>
+        html {
+            line-height: 1.15
+        }
+
+        main {
+            display: block
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: .67em 0
+        }
+
+        hr {
+            box-sizing: content-box;
+            height: 0;
+            overflow: visible
+        }
+
+        pre {
+            font-family: monospace,monospace;
+            font-size: 1em
+        }
+
+        a {
+            background-color: transparent
+        }
+
+        abbr[title] {
+            border-bottom: none;
+            text-decoration: underline;
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        b,strong {
+            font-weight: bolder
+        }
+
+        code,kbd,samp {
+            font-family: monospace,monospace;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        img {
+            border-style: none
+        }
+
+        button,input,optgroup,select,textarea {
+            font-family: inherit;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0
+        }
+
+        button,input {
+            overflow: visible
+        }
+
+        button,select {
+            text-transform: none
+        }
+
+        [type=button],[type=reset],[type=submit],button {
+            -webkit-appearance: button
+        }
+
+        [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner {
+            border-style: none;
+            padding: 0
+        }
+
+        [type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring {
+            outline: 1px dotted ButtonText
+        }
+
+        fieldset {
+            padding: .35em .75em .625em
+        }
+
+        legend {
+            box-sizing: border-box;
+            color: inherit;
+            display: table;
+            max-width: 100%;
+            padding: 0;
+            white-space: normal
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        textarea {
+            overflow: auto
+        }
+
+        [type=checkbox],[type=radio] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        [type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        [type=search]::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        details {
+            display: block
+        }
+
+        summary {
+            display: list-item
+        }
+
+        [hidden],template {
+            display: none
+        }
+    </style>
+    <style>
+        :root {
+            --font-family: "Inter",Arial,sans-serif;
+            --bg-body: #ededed;
+            --color-rr: #e00061;
+            --color-nr: #027db4;
+            --color-orange: #fa9534;
+            --color-blackish: #171c20;
+            --color-grayish: #555;
+            --color-action: #007dff;
+            --color-dark-blue: #1c719c;
+            --rr-section-w-padding-x: 0
+        }
+
+        @media (max-width: 1200px) {
+            :root {
+                --rr-section-w-padding-x:10px
+            }
+        }
+
+        @media (max-width: 370px) {
+            :root {
+                --rr-section-w-padding-x:5px
+            }
+        }
+
+        *,:after,:before {
+            box-sizing: border-box
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0,0,0,0)
+        }
+
+        body {
+            color: #111;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+            background-color: #f5f5f5;
+        }
+
+        img {
+            vertical-align: middle
+        }
+
+        .hide,[v-cloak] {
+            display: none
+        }
+
+        .clearfix {
+            zoom:1}
+
+        .clearfix:after {
+            clear: both;
+            content: "";
+            display: block;
+            height: 0;
+            visibility: hidden
+        }
+
+        .text-left {
+            text-align: left
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-right {
+            text-align: right
+        }
+
+        .color-orange {
+            color: var(--color-orange)
+        }
+
+        .color-red {
+            color: red
+        }
+
+        .overflow-hidden {
+            overflow: hidden!important
+        }
+
+        .text-action {
+            color: var(--color-action);
+            cursor: pointer
+        }
+
+        .text-underline {
+            text-decoration: underline
+        }
+
+        .iconfont {
+            font-weight: 400;
+            line-height: 1
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .rr-scrollbar::-webkit-scrollbar-track,body::-webkit-scrollbar-track {
+                background-color:initial
+            }
+
+            .rr-scrollbar::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
+                background-color: #c1c1c1;
+                border-radius: 4px
+            }
+
+            .rr-scrollbar::-webkit-scrollbar-thumb:hover,body::-webkit-scrollbar-thumb:hover {
+                background-color: #a8a8a8
+            }
+
+            .rr-scrollbar::-webkit-scrollbar,body::-webkit-scrollbar {
+                height: 8px;
+                width: 8px
+            }
+
+            @-moz-document url-prefix() {
+                * {
+                    scrollbar-width: thin
+                }
+            }
+        }
+
+        .rr-section-w {
+            margin: auto;
+            max-width: 1200px;
+            padding: 0 var(--rr-section-w-padding-x);
+            width: 100%
+        }
+
+        .rr-goods-list {
+            --rr-goods-item-color: var(--color-rr);
+            --rr-goods-item-border-radius: 6px;
+            --rr-goods-item-row-num: 5;
+            --rr-goods-item-margin-btm: 10px;
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 calc(var(--rr-goods-item-margin-btm)/2*-1);
+            padding-top: 20px
+        }
+
+        @media (min-width: 1024px) {
+            .rr-goods-list {
+                --rr-goods-item-row-num:5
+            }
+        }
+
+        @media (min-width: 850px) and (max-width:1023px) {
+            .rr-goods-list {
+                --rr-goods-item-row-num:4
+            }
+        }
+
+        @media (min-width: 640px) and (max-width:849px) {
+            .rr-goods-list {
+                --rr-goods-item-row-num:3
+            }
+        }
+
+        @media (max-width: 639px) {
+            .rr-goods-list {
+                --rr-goods-item-row-num:2
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .rr-goods-list {
+                --rr-goods-item-margin-btm:14px
+            }
+        }
+
+        @media (max-width: 370px) {
+            .rr-goods-list {
+                --rr-goods-item-margin-btm:6px
+            }
+        }
+
+        .rr-goods-item {
+            background-color: #fff;
+            border: 1px solid #f2f2f2;
+            border-radius: var(--rr-goods-item-border-radius);
+            color: inherit;
+            display: block;
+            margin: 0 calc(var(--rr-goods-item-margin-btm)/2) var(--rr-goods-item-margin-btm);
+            outline-color: #fff;
+            padding-bottom: 4px;
+            position: relative;
+            text-decoration: none;
+            transition: all .3s;
+            width: calc((100% - var(--rr-goods-item-margin-btm)*var(--rr-goods-item-row-num))/var(--rr-goods-item-row-num));
+            overflow: hidden;
+        }
+
+        .rr-goods-item__img {
+            background: #fff;
+            border-radius: var(--rr-goods-item-border-radius) var(--rr-goods-item-border-radius) 0 0;
+            overflow: hidden;
+            padding-bottom: 100%;
+            position: relative;
+            width: 100%
+        }
+
+        .rr-goods-item__img.is-loading:before {
+            align-items: center;
+            color: var(--rr-goods-item-color);
+            content: "\e691";
+            display: flex;
+            font-family: iconfont!important;
+            font-size: 30px;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%
+        }
+
+        .rr-goods-item__img img {
+            display: block;
+            height: 100%;
+            left: 0;
+            -o-object-fit: contain;
+            object-fit: contain;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transition: transform .3s;
+            width: 100%
+        }
+
+        .rr-goods-item__img img[data-loaded] {
+            opacity: 1
+        }
+
+        .rr-goods-item__title {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            display: -webkit-box;
+            font-size: 14px;
+            height: 3em;
+            line-height: 1.3;
+            overflow: hidden;
+            padding: 5px;
+            text-overflow: ellipsis;
+            word-break: break-word
+        }
+
+        .rr-goods-item__btm {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5px
+        }
+
+        .rr-goods-item__price {
+            flex: 1
+        }
+
+        .rr-goods-item__price-curr {
+            color: var(--rr-goods-item-color);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -.5px
+        }
+
+        .rr-goods-item__price-origin {
+            color: var(--color-grayish);
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: -.5px;
+            text-decoration: line-through
+        }
+
+        .rr-goods-item__discount {
+            background-color: var(--rr-goods-item-color);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 12px;
+            letter-spacing: -.5px;
+            line-height: 1.5;
+            padding: 0 4px
+        }
+
+        .rr-goods-item.no-review {
+            --rr-goods-item-color: var(--color-nr)
+        }
+
+        .rr-goods-item.sold-out {
+            pointer-events: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none
+        }
+
+        .rr-goods-item__sold-out {
+            height: 100%;
+            top: 0
+        }
+
+        .rr-goods-item__countdown,.rr-goods-item__sold-out {
+            align-items: center;
+            background: rgba(0,0,0,.5);
+            border-radius: inherit;
+            color: #fff;
+            display: flex;
+            font-size: 20px;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            width: 100%
+        }
+
+        .rr-goods-item__countdown {
+            top: 40%
+        }
+
+        .rr-goods-item__bonus {
+            background: rgba(218,55,100,.8);
+            color: #fff;
+            font-size: 12px;
+            height: 20px;
+            left: -6px;
+            line-height: 20px;
+            padding: 0 4px;
+            position: absolute;
+            top: 5px;
+            z-index: 2
+        }
+
+        .rr-goods-item__bonus:before {
+            border-left: 5px solid transparent;
+            border-top: 5px solid rgba(218,55,100,.8);
+            bottom: -4px;
+            content: "";
+            height: 0;
+            left: 0;
+            position: absolute;
+            width: 0
+        }
+
+        .rr-goods-item:hover img {
+            transform: scale(1.05)
+        }
+
+        @media (max-width: 500px) {
+            .rr-goods-item__btm {
+                height:30px;
+                line-height: 1
+            }
+        }
+
+        .rr-goods-list.okey .rr-goods-item__btm {
+            height: auto;
+            line-height: 1.1
+        }
+
+        .rr-goods-list.okey .rr-goods-item__price-curr {
+            display: block;
+            font-size: 24px;
+            letter-spacing: 0;
+        }
+
+        .rr-goods-list.okey .rr-goods-item__price-origin {
+            display: block;
+            font-size: 14px;
+            letter-spacing: 0
+        }
+
+        .rr-goods-list.okey .rr-goods-item__discount {
+            padding: 2px 8px
+        }
+
+
+        .my-null-box i {
+            color: #999;
+            font-size: 120px
+        }
+
+        .my-end-box {
+            padding: 15px 0;
+            text-align: center
+        }
+
+        .my-end-box span {
+            background: inherit;
+            display: inline-block;
+            font-size: 16px;
+            padding: 0 5px;
+            position: relative;
+            z-index: 1
+        }
+
+        .my-end-box span:after,.my-end-box span:before {
+            border-top: 1px solid #ccc;
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 100%
+        }
+
+        .my-end-box span:before {
+            left: -100%
+        }
+
+        .my-end-box span:after {
+            right: -100%
+        }
+
+        .my-retry-box {
+            padding: 15px 0;
+            text-align: center
+        }
+
+        .my-retry-box i {
+            color: #cf3736;
+            font-size: 50px
+        }
+
+        .open-on-amazon {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #007dff;
+        }
+
+        .btn-want-it {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 5px 0;
+            background: var(--color-rr);
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: -4px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1 class="text-center">Free Products</h1>
+    <my-goods-list :goods-list="goodsList" :listen-scroll="false"></my-goods-list>
+</div>
+<script src="Public/js/vue.min.js"></script>
+<script>
+    (function () {
+        Vue.prototype.$vars = {
+            CURRENCY: '$'
+        };
+        Vue.prototype.$contact = function () {
+            console.log('contact');
+        }
+    })();
+</script>
+<script type="text/x-template" id="my-goods-list-template">
+    <div class="section-goods-list">
+        <div class="rr-section-w section-goods-w">
+            <div v-if="listShow" class="rr-goods-list okey">
+                <a v-for="(goods, index) in myList" :key="index" href="javascript:void(0);"
+                   class="rr-goods-item" :class="{ 'no-review': goods.order_type === 'no_review', 'sold-out': goods.is_total_limit > 0 }">
+                    <div class="rr-goods-item__img is-loading">
+                        <img :src="goods.img0" alt="" referrerpolicy="no-referrer"
+                             loading="lazy" decoding="async" @load="handleImg">
+                    </div>
+                    <div class="rr-goods-item__title">{{ goods.listing_name }}</div>
+                    <div class="rr-goods-item__btm">
+                        <div class="rr-goods-item__price">
+                            <span class="rr-goods-item__price-curr">
+                                {{ $vars.CURRENCY }}{{ goods.order_type === 'no_review' ? ((100 - goods.discount) / 100 * goods.price).toFixed(2) : '0.00' }}
+                            </span>
+                            <span class="rr-goods-item__price-origin">{{ $vars.CURRENCY }}{{ goods.price }}</span>
+                        </div>
+                        <div class="rr-goods-item__discount">{{ goods.order_type === 'no_review' ? goods.discount : '100' }}% OFF</div>
+                    </div>
+                    <div>
+                        <a :href="goods.link" target="_blank" class="open-on-amazon">Open on Amazon &gt;&gt;</a>
+                    </div>
+                    <div>
+                        <span class="btn-want-it">#{{ goods.order_id }}</span>
+                    </div>
+                    <div v-if="goods.is_total_limit > 0" class="rr-goods-item__sold-out">Sold Out</div>
+                </a>
+            </div>
+        </div>
+        <div v-show="isLoading" class="my-loading-box">Loading...</div>
+        <div v-if="isNoDataShow" class="my-null-box">
+            <i class="iconfont icon-empty"></i>
+            <p>No product</p>
+        </div>
+        <div v-if="isTheEndShow" class="my-end-box">
+            <span>The End</span>
+        </div>
+        <div v-if="retry && !isLoading" class="my-retry-box">
+            <i class="iconfont icon-jinggao"></i>
+            <p>Failed to load <a href="javascript:void(0);" @click="getList">Try again</a></p>
+        </div>
+    </div>
+</script>
+<script>
+    (function () {
+        Vue.component('my-goods-list', {
+            template: '#my-goods-list-template',
+            props: {
+                listQuery: {
+                    type: Object,
+                    required: false,
+                    default: function () {
+                        return {};
+                    }
+                },
+                listenScroll: {
+                    type: Boolean,
+                    required: false,
+                    default: true
+                },
+                watchQuery: {
+                    type: Boolean,
+                    required: false,
+                    default: true
+                },
+                goodsList: {
+                    type: Array,
+                    required: false,
+                    default: function () {
+                        return [];
+                    }
+                }
+            },
+            data: function () {
+                return {
+                    myList: [],
+                    pageNum: 1,
+                    pageSize: 30,
+                    pageTotal: 1,
+                    maxPageNum: 100,
+                    isNoMoreData: false,
+                    isLoading: false,
+                    retry: false,
+                    goodsShow: false,
+                    orderID: ''
+                }
+            },
+            computed: {
+                isToEnd: function () {
+                    return this.isNoMoreData || this.pageNum > this.maxPageNum || this.pageNum > this.pageTotal;
+                },
+                isNoDataShow: function () {
+                    return this.isToEnd && this.myList.length === 0 && !this.isLoading;
+                },
+                isTheEndShow: function () {
+                    return this.isToEnd && this.myList.length > 0 && !this.isLoading;
+                },
+                listShow: function () {
+                    return this.myList.length > 0;
+                }
+            },
+            watch: {
+                listQuery: function () {
+                    if (!this.watchQuery) return;
+                    this.myList = [];
+                    this.pageNum = 1;
+                    this.isNoMoreData = false;
+                    this.getList();
+                }
+            },
+            mounted: function () {
+                this.listenScroll && window.addEventListener('scroll', this.handleScroll, { passive: true });
+            },
+            created: function () {
+                if (this.goodsList.length > 0) {
+                    this.myList = this.goodsList;
+                    this.isNoMoreData = !this.listenScroll;
+                } else {
+                    this.getList();
+                }
+            },
+            methods: {
+                handleScroll: function () {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+                    const wh = window.innerHeight;
+                    const distance = 300;
+
+                    if (this.isLoading || this.isToEnd || this.retry) { return }
+
+                    if (scrollTop + wh >= scrollHeight - distance) {
+                        this.getList();
+                    }
+                },
+                getList: function () {
+                },
+                handleImg: function (evt) {
+                    evt.target.setAttribute('data-loaded', 1);
+                },
+            }
+        });
+    })();
+</script>
+<script>
+    (function () {
+        const goodsList1 = [
+            {
+                order_id: 1,
+                price: 8.99,
+                listing_name: "Bird Feeder for Outdoors Hunging, Window Bird Feeder with Strong Suction Cups Hooks, Acrylic Clear Window Bird Feeder for Outside",
+                img0: "https://m.media-amazon.com/images/I/71zMBblJ3fL._AC_SX300_.jpg",
+                order_type: "review",
+                is_total_limit: 0,
+                cash_back_amount: "0.00",
+                discount: "0",
+                link: 'https://www.amazon.com/dp/B0CCRCZMF6/ref=sr_1_4?ie=UTF8&qid=1699844600&sr=1-4&keywords=clear+window+bird+feeder+suction+cups',
+                asin: 'B0CCRCZMF6'
+            },
+            {
+                order_id: 2,
+                price: 71.99,
+                listing_name: "SPADE 3 Channel Dash Cam Front and Rear Inside, 1080P Full HD Dash Camera for Cars with 32GB SD Card, 170° Wide Angle, 3.16”IPS Screen, Night Vision, WDR, 24H Parking Mode Front and Back Dashcam",
+                img0: "https://m.media-amazon.com/images/I/71JK4b6-zqL._AC_SX300_.jpg",
+                order_type: "review",
+                is_total_limit: 0,
+                cash_back_amount: "0.00",
+                discount: "0",
+                link: 'https://www.amazon.com/dp/B0C23D3KBM/ref=sr_1_2?ie=UTF8&qid=1699844611&sr=1-2&keywords=dash+cam+3+channel&m=ASL20MMH8LRL8',
+                asin: 'B0C23D3KBM'
+            },
+            {
+                order_id: 3,
+                price: 49.99,
+                listing_name: "Dash Cam 4K WiFi 2160P Dash Camera for Cars, Mini Front Car Camera, Wireless Mini Dash Cam with App, Night Vision. 24H Parking Mode, G-Sensor, Loop Recording,Support 256GB Max",
+                img0: "https://m.media-amazon.com/images/I/71W6BWK79pL._AC_SX300_.jpg",
+                order_type: "review",
+                is_total_limit: 0,
+                cash_back_amount: "0.00",
+                discount: "0",
+                link: 'https://www.amazon.com/dp/B0CKQKJQHL/ref=sr_1_10?ie=UTF8&qid=1699583406&sr=1-10&keywords=Dash+Cam+WiFi+SPADE&m=ASL20MMH8LRL8',
+                asin: 'B0CKQKJQHL'
+            },
+        ]
+        new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    goodsList: goodsList1
+                }
+            },
+            methods: {
+                handleContact: function () {
+                }
+            }
+        });
+    })();
+</script>
+</body>
+</html>
