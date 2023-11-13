@@ -370,7 +370,7 @@
         .rr-goods-item__img.is-loading:before {
             align-items: center;
             color: var(--rr-goods-item-color);
-            content: "\e691";
+            content: "...";
             display: flex;
             font-family: iconfont!important;
             font-size: 30px;
@@ -757,6 +757,7 @@
                     }
                 },
                 getList: function () {
+                    console.log('getList');
                 },
                 handleImg: function (evt) {
                     evt.target.setAttribute('data-loaded', 1);
