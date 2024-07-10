@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Work report</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/11.0.5/swiper-bundle.js"></script>
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <h1>工作报告</h1>
+        </div>
+        <div class="swiper-slide">
+            <h1>1. 工作回顾</h1>
+        </div>
+        <div class="swiper-slide">
+            <div>
+                <h2>工作岗位职责</h2>
+                <ul style="text-align: left">
+                    <li>负责运营端</li>
+                    <li>负责客户端管理中心</li>
+                    <li>负责客户端前台PC</li>
+                    <li>负责客户端前台H5</li>
+                    <li>负责官网首页</li>
+                </ul>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div>
+                <h2>已经完成的工作</h2>
+                <ul style="text-align: left">
+                    <li>客户端H5给易企出行建议，解决了ios无法拨打电话的bug</li>
+                    <li>客户端h5因私出行增加国内机票</li>
+                    <li>客户端微信内支付调起支付宝APP</li>
+                    <li>客户端增加开票信息维护</li>
+                    <li>运营端国际机票增加VIP追踪</li>
+                    <li>客户端PC火车票改签bug修复</li>
+                    <li>运营端国内机票手工单2</li>
+                    <li>客户端国内酒店城市优化</li>
+                    <li>客户端管理中心部门预算</li>
+                    <li>官网增加分公司模块</li>
+                    <li>客户端H5对接银盛支付</li>
+                    <li>运营端增加其他业务模块</li>
+                    <li>大大小小的bug修复</li>
+                </ul>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div>
+                <h2>正在做的工作</h2>
+                国内机票联程 <br>
+                客户端出差单优化
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <h1>2. 自我评价</h1>
+        </div>
+        <div class="swiper-slide">
+            <div>
+                <h2>做的欠缺的地方</h2>
+                对项目不熟悉，目前熟悉度近20%
+
+                <h2>做的较好的地方</h2>
+                完成任务的过程中主动发现并修复一些bug
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <h1>3. 工作体会</h1>
+        </div>
+        <div class="swiper-slide">
+            <div>
+                <h2>对企业文化的理解</h2>
+                完成客户的需求优先，市场驱动
+
+                <h2>对部门的建议</h2>
+                增加随产品功能验收 & 把关
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+<script>
+    new Swiper(".mySwiper", {
+        direction: "vertical",
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        keyboard: {
+            enabled: true,
+        },
+        mousewheel: true,
+    });
+</script>
+</body>
+</html>
