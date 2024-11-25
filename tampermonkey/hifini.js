@@ -20,36 +20,49 @@
     const playerEl = document.createElement('div')
     musicList[0].parentNode.before(playerEl)
 
-    const jsLoaded = await new Promise((resolve, reject) => {
-        const tag = document.createElement('script')
-        tag.src = PLAYER_JS_SRC
-
-        tag.addEventListener('load', () => {
-            resolve(true)
+    async function loadPlayerAsset(url = '') {
+      return await new Promise((resolve, reject) => {
+        const suffix = url.split('.').at(-1)
+        const tagName = suffix === 'css' ? 'link' : 'script'
+        const el = document.createElement(tagName)
+    
+        el.setAttribute('crossorigin', 'anonymous')
+    
+        if (tagName === 'link') {
+          el.href = url
+          el.rel = 'stylesheet'
+        } else {
+          el.src = url
+        }
+    
+        el.addEventListener('load', () => {
+          resolve(true)
         })
-
-        tag.addEventListener('error', () => {
-            reject(false)
+    
+        el.addEventListener('error', () => {
+          reject(false)
         })
+    
+        document.head.append(el)
+      })
+    }
 
-        document.head.append(tag)
-    })
-
-    const cssLoaded = await new Promise((resolve, reject) => {
-        const tag = document.createElement('link')
-        tag.href = PLAYER_CSS_SRC
-        tag.rel = 'stylesheet'
-
-        tag.addEventListener('load', () => {
-            resolve(true)
-        })
-
-        tag.addEventListener('error', () => {
-            reject(false)
-        })
-
-        document.head.append(tag)
-    })
+    let [cssLoaded, jsLoaded] = await Promise.all([
+        loadPlayerAsset('https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css'),
+        loadPlayerAsset('https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js')
+    ])
+    if (!cssLoaded || !jsLoaded) {
+        [cssLoaded, jsLoaded] = await Promise.all([
+          loadPlayerAsset('https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css'),
+          loadPlayerAsset('https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js')
+        ])
+    }
+    if (!cssLoaded || !jsLoaded) {
+        [cssLoaded, jsLoaded] = await Promise.all([
+          loadPlayerAsset('https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css'),
+          loadPlayerAsset('https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js')
+        ])
+    }
 
     if (!jsLoaded || !window.APlayer || !cssLoaded) {
         return playerEl.textContent = 'Load APlayer Failed!!!'
