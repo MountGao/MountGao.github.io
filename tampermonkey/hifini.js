@@ -7,8 +7,6 @@
 
     const KEY_HREF = 'data-href'
     const KEY_TID = 'data-tid'
-    const PLAYER_JS_SRC = 'https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js'
-    const PLAYER_CSS_SRC = 'https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css'
 
     const musicList = Array.from(document.querySelectorAll(`[${KEY_TID}][${KEY_HREF}]`))
         .filter((item) => {
@@ -25,24 +23,24 @@
         const suffix = url.split('.').at(-1)
         const tagName = suffix === 'css' ? 'link' : 'script'
         const el = document.createElement(tagName)
-    
+
         el.setAttribute('crossorigin', 'anonymous')
-    
+
         if (tagName === 'link') {
           el.href = url
           el.rel = 'stylesheet'
         } else {
           el.src = url
         }
-    
+
         el.addEventListener('load', () => {
           resolve(true)
         })
-    
+
         el.addEventListener('error', () => {
           reject(false)
         })
-    
+
         document.head.append(el)
       })
     }
