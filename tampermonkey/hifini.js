@@ -101,7 +101,7 @@
                 iframe.addEventListener('load', async () => {
                     await sleep()
 
-                    const music = iframe?.contentWindow?.ap4?.music || null
+                    const music = iframe?.contentWindow?.ap4?.music || iframe?.contentWindow?.ap?.list?.audios?.[0]
                     if (music) {
                         resolve(music)
                     } else {
