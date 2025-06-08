@@ -86,6 +86,12 @@
             listMaxHeight: 90,
         })
 
+        myPlayer.on('error', () => {
+            console.log('APlayer-error')
+            const musicIdCurr = myPlayer?.list?.audios?.[myPlayer?.list?.index]?.id
+            musicIdCurr && storeMusic2Local(musicIdCurr)
+        })
+
         const loadStep = 10
         let loadIndex = 0
         let loadDone = false
@@ -120,9 +126,44 @@
             }).catch(e => e)
         }
 
+        const STORE_KEY_MUSIC = '__HIFINI_MUSIC'
+
+        const storeMusic2Local = (id, music) => {
+            try {
+                const data = JSON.parse(sessionStorage.getItem(STORE_KEY_MUSIC) || '{}')
+                data[id] = music ? {
+                    id: id,
+                    artist: music.artist || music.author,
+                    cover: music.cover || music.pic,
+                    name: music.name || music.title,
+                    url: music.url,
+                } : undefined
+                sessionStorage.setItem(STORE_KEY_MUSIC, JSON.stringify(data))
+            } catch (e) {
+                console.log(`storeMusic2Local-error-${id}`, e)
+                sessionStorage.removeItem(STORE_KEY_MUSIC)
+            }
+        }
+
+        const getLocalMusicById = (id) => {
+            let music = null
+            try {
+                const data = JSON.parse(sessionStorage.getItem(STORE_KEY_MUSIC) || '{}')
+                music = data?.[id]
+            } catch (e) {
+                console.log(`getMusicFromLocal-error-${id}`, e)
+            }
+            return music
+        }
+
         const loadList = async () => {
             for (const item of musicList.slice(loadIndex, loadIndex + loadStep)) {
-                const music = await getMusic(item.getAttribute(KEY_HREF))
+                const id = item.getAttribute(KEY_TID)
+                let music = getLocalMusicById(id)
+                if (!music) {
+                    music = await getMusic(item.getAttribute(KEY_HREF))
+                    music && storeMusic2Local(id, music)
+                }
                 music && myPlayer.list.add(music)
             }
             loadIndex += loadStep
