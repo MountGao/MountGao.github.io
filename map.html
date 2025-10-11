@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>BMapGL</title>
+</head>
+<body>
+<div>
+  <div id="BMapBox" style="width: 100%;height: 500px"></div>
+</div>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=p5PiMx9DztdYhDGm5MCdlUWCxzg1PLIK"></script>
+<script>
+  const map = new BMapGL.Map('BMapBox');
+  const MAP_POINT = {
+    lon: '113.49', lat: '23.19'
+  }
+  const point = new BMapGL.Point(MAP_POINT.lon, MAP_POINT.lat);
+  map.enableScrollWheelZoom(); // 启用滚轮放大缩小
+  map.centerAndZoom(point, 15);
+</script>
+</body>
+</html>
